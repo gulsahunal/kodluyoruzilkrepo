@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends Dizisi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+        
+        body {
+            background-color: #E6E6FA;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            white-space: normal;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #FFF;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .section {
+            flex: 1;
+            min-width: 300px;
+            margin: 0 20px 20px;
+            vertical-align: top;
+            white-space: normal;
+        }
+        h1, h2 {
+            color: #8B4513;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .friends-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .friends-image:hover {
+            transform: scale(1.02);
+        }
+        .character-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .character-list li {
+            background-color: #F0E68C;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .character-list li:hover {
+            background-color: #FFD700;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section fade-in">
+            <h1>Friends Dizisi</h1>
+            <img src="assets/images/room.jpg" alt="Monica'nın Dairesi" class="friends-image">
+            <p>Friends, 1994-2004 yılları arasında yayınlanan ve büyük bir hayran kitlesine sahip olan bir Amerikan sitcom dizisidir. Dizi, New York'ta yaşayan altı arkadaşın hayatını konu alır: Rachel, Ross, Monica, Chandler, Joey ve Phoebe.</p>
+        </div>
+        <div class="section fade-in">
+            <h2>Karakterler</h2>
+            <ul class="character-list">
+                <li>Rachel Green</li>
+                <li>Ross Geller</li>
+                <li>Monica Geller</li>
+                <li>Chandler Bing</li>
+                <li>Joey Tribbiani</li>
+                <li>Phoebe Buffay</li>
+            </ul>
+        </div>
+        <div class="section fade-in">
+            <h2>Öne Çıkan Bölümler</h2>
+            <p>Friends dizisinin bazı öne çıkan bölümleri şunlardır:</p>
+            <ul>
+                <li>The One Where Monica Gets a Roommate</li>
+                <li>The One with the Prom Video</li>
+                <li>The One Where Everybody Finds Out</li>
+                <li>The One with Ross's Wedding</li>
+                <li>The Last One</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function fadeInElements() {
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px -100px 0px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(
+                entries,
+                appearOnScroll
+            ) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('appear');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fadeInElements);
+    </script>
+</body>
+</html>
